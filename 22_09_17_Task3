@@ -1,0 +1,19 @@
+// ConsoleApplication18.cpp: определяет точку входа для консольного приложения.
+//
+
+#include <iostream>
+using namespace std;
+
+int main()
+{
+	int n, b = 0;
+	int a[100000];
+	cin >> n;
+	for(int i = 0; i < n; ++i) {
+		cin >> a[i];
+		if(((a[i] % 27 == 0) && (a[i] % 72 != 0)) || ((a[i] % 27 != 0) && (a[i] % 72 == 0))) b += a[i];
+	}
+	cout << b;
+    return 0;
+}
+
