@@ -1,0 +1,65 @@
+// ConsoleApplication15.cpp: определяет точку входа для консольного приложения.
+//
+
+#include <iostream>
+int n[3];
+using namespace std;
+
+int max(int a, int b, int c) {
+	if(a < b) {
+		if(b > c) return b;
+		else return c;
+	}
+	else {
+		if(a > c) return a;
+		else return c;
+	}
+}
+
+
+int min(int a, int b, int c) {
+		if(a < b) {
+			if(a < c) return a;
+			else return c;
+		}
+		else {
+			if(b < c) return b;
+			else return c;
+		}
+	}
+
+void swap_1() {
+	int d = n[2];
+	n[2] = n[1];
+	n[1] = n[0];
+	n[0] = d;
+}
+
+int med(int a, int b, int c) {
+	int m[3];
+	m[0] = a;
+	m[1] = b;
+	m[2] = c;
+	for(int i = 0; i <= 2; ++i)	for(int j = i+1; j <= 2; ++j)	if(m[i] < m[j]) { 
+		int d = m[i];
+		m[i] = m[j];
+		m[j] = d;
+	}
+	return m[1];
+}
+
+int main()
+{
+	int s;
+	cout << "Choose function. Write down the function number: 1 - swap\n\t2 - med\n\t3 - max\n\t4 - min";
+	cin >> s;
+	cout << "Write down 3 numbers";
+	for(int i = 0; i <= 2; ++i) {
+		cin >> n[i];
+	}
+	if(s == 1) { swap_1(); cout << n[0] << " " << n[1]  << " " << n[2]; }
+	else if(s == 2) cout << med(n[2], n[0], n[1]);
+	else if(s == 3) cout << max(n[0], n[1], n[2]);
+	else if(s == 4) cout << min(n[0], n[1], n[2]);
+    return 0;
+}
