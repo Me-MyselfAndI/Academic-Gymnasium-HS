@@ -8,8 +8,9 @@ using namespace std;
 int main()
 {
 	int n, i, size = 0;
-	int a[100000], b[100000];
 	cin >> n;
+	int *a = new int[n];
+	int *b = new int[n];
 	for(i = 0; i < n; ++i){
 		cin >> a[i];
 		bool original = 1;
@@ -21,8 +22,14 @@ int main()
 			size++;
 		}
 	}
+	delete[] a;
+	int *c = new int[size];
+	for(int i = 0; i<size; ++i){
+		c[i] = b[i];
+	}
+	delete[] b;
 	for(int i = 0; i < size; ++i){
-		cout << b[i] << " ";
+		cout << c[i] << " ";
 	}
 	return 0;
 }
