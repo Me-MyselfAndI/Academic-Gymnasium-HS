@@ -6,8 +6,8 @@ using namespace std;
 int main()
 {
 	int n, b = 0;
-	int a[100000];
 	cin >> n;
+	int *a = new int[n];
 	for(int i = 0; i < n; ++i) {
 		cin >> a[i];
 		if(((a[i] % 27 == 0) && (a[i] % 72 != 0)) || ((a[i] % 27 != 0) && (a[i] % 72 == 0))) b += a[i];
