@@ -35,11 +35,11 @@ double min(double a, double b, double c) {
 	}
 }
 
-void swap_1(double* a, double* b, double* c) {
-	double d = *c;
-	*c = *b;
-	*b = *a;
-	*a = d;
+void swap_1(double a, double b, double c) {
+	double d = n[2];
+	n[2] = n[1];
+	n[1] = n[0];
+	n[0] = d;
 }
 
 double med(double a, double b, double c) {
@@ -64,7 +64,7 @@ int main()
 	for(int i = 0; i <= 2; ++i) {
 		cin >> n[i];
 	}
-	if(s == 1) { swap_1(&n[0], &n[1], &n[2]); cout << n[0] << " " << n[1] << " " << n[2]; }
+	if(s == 1) { swap_1(n[0], n[1], n[2]); cout << n[0] << " " << n[1] << " " << n[2]; }
 	else if(s == 2) cout << med(n[2], n[0], n[1]);
 	else if(s == 3) cout << max(n[0], n[1], n[2]);
 	else if(s == 4) cout << min(n[0], n[1], n[2]);
