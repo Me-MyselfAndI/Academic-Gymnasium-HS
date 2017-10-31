@@ -21,7 +21,7 @@ double max(double a, double b, double c) {
 
 double avg(double a, double b, double c) {
 	int s = a + b + c;
-	return << s/3;
+	return s/3;
 }
 
 double min(double a, double b, double c) {
@@ -60,7 +60,7 @@ int main()
 	int s;
 	cout << "Choose function. Write down the function number: 1 - swap\n\t2 - med\n\t3 - max\n\t4 - min";
 	cin >> s;
-	cout << "Write down 3 numbers";
+	cout << "\nWrite down 3 numbers";
 	for(int i = 0; i <= 2; ++i) {
 		cin >> n[i];
 	}
