@@ -1,0 +1,73 @@
+#include <iostream>
+using namespace std;
+
+struct Date{
+public:
+    long date;
+
+    int year(){
+        return date/10000;
+    }
+    int day(){
+        return date%100;
+    }
+    int mounth(){
+        int r = year();
+        r*=10000;
+        return (date - r - day())/100;
+    }
+    string week_day(){
+        int r = day();
+        if(date < 1582410){r-=11;}
+        r += 5*year()/4 - year()/100 + year()/400 + (31*mounth()+10)/12;
+        if(r%7 == 6) return "Monday";
+        else if(r%7 == 7) return "Tuesday";
+        else if(r%7 == 1) return "Wednesday";
+        else if(r%7 == 2) return "Thursday";
+        else if(r%7 == 3) return "Friday";
+        else if(r%7 == 4) return "Saturday";
+        else if(r%7 == 5) return "Sunday";
+    }
+};
+
+long howManyDaysHadGone(Date a, Date b){
+    if(a.date < b.date) swap(a,b);
+    long res;
+    res += (a.year()- b.year())*365 + (a.mounth() - b.mounth())*30 + (a.day() - b.day());
+    int currMounth = a.mounth()-1;
+    int currYear = a.year();
+    while(currMounth != b.mounth()){
+        currMounth++;
+        if(currMounth > 12) {currMounth = 1; currYear++;}
+        if((currYear%4 == 0)&&(currYear%400 != 0)){}
+        if((currMounth == 1)||(currMounth == 3)||(currMounth == 5)||(currMounth == 7)||(currMounth == 8)||(currMounth == 10)||(currMounth == 12))res+=31;
+        else if(currMounth == 2) {
+            if((currYear%4 == 0)&&(currYear%400 != 0)) res -= 2;
+            else res-=3;
+        }
+    }
+    return res;
+}
+
+long howManyMounthsHadGone(Date a, Date b){
+    if(a.date < b.date)swap(a,b);
+    int res = (a.mounth() - b.mounth() + (a.year() - b.year())*12);
+    if(a.day() < b.day())res --;
+    return res;
+}
+
+long howManyYearsHadGone(Date a, Date b){
+    if(a.date < b.date)swap(a,b);
+    int res = a.year() - b.year();
+    if(a.mounth() < b.mounth())res --;
+    return res;
+}
+
+int main() {
+    long a, b;
+    cin >> a >> b;
+    Date date1 = {a};
+    Date date2 = {b};
+    cout << date1.week_day() << " to " << date1.week_day() << "; " << howManyDaysHadGone(date1, date2) << " days had gone; " << howManyMounthsHadGone(date1, date2) << " mounths had gone; " <<howManyYearsHadGone(date1, date2) << " years had gone. ";
+    return 0;
+}
