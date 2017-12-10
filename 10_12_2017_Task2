@@ -17,19 +17,6 @@ int main() {
     int a[size];
     int k = 0;
     do{
-       /*if(k > size){
-            int *b = new int[size];
-            for(int j = 0; j < size; ++j){
-                b[j] = a[j];
-            }
-            size+=100;
-            int *a = new int[size];
-            for(int j = 0; j < size-100; ++j){
-                a[j] = b[j];
-            }
-            delete[] b;
-        }
-*/
         cin >> a[k];
         ++k;
     } while(a[k-1] != 0);
