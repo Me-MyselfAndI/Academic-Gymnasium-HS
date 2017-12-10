@@ -1,0 +1,55 @@
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+
+bool isCube(int d){
+    if(d < 2) return 1;
+    for(int i = 2; i < d; ++i){
+        if(d == pow(i,3)) return 1;
+    }
+    return 0;
+}
+
+int main() {
+
+    int size = 100;
+    int a[size];
+    int k = 0;
+    do{
+       /*if(k > size){
+            int *b = new int[size];
+            for(int j = 0; j < size; ++j){
+                b[j] = a[j];
+            }
+            size+=100;
+            int *a = new int[size];
+            for(int j = 0; j < size-100; ++j){
+                a[j] = b[j];
+            }
+            delete[] b;
+        }
+*/
+        cin >> a[k];
+        ++k;
+    } while(a[k-1] != 0);
+    size = k - 1;
+
+    for(int i = 0; i < size-1; ++i){
+        for(int j = i+1; j < size; ++j){
+            if(a[i] > a[j]) swap(a[i], a[j]);
+        }
+    }
+    
+    int b[100][100];
+
+    for(int i = 0; i < size - 1; ++i){
+        //Первый вариант: оба числа - полные кубы
+        if (isCube(a[i])) for(int j = i+1; j < size; ++j) if(isCube(a[j])) b[i][j] = 1;
+        //Второй вариант: умножение а на а^2
+        for(int j = i+1; j < size; ++j) if(a[j] == pow(a[i], 2)) b[i][j] = 1;
+    }
+    
+    for(int i = 0; i < size; ++i) 	for(int j = 0; j < size; ++j) if(b[i][j] == 1) cout << a[i] << " " << a[j] << endl;;
+    return 0;
+}
