@@ -1,0 +1,53 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+class String{
+public:
+    vector<char> s;
+    String(int n, char string1[]){
+        s.reserve(n);
+
+        for(int i = 0; i<n; ++i){
+            s.push_back(string1[i]);
+        }
+        if(string1[n-1]!='\0') {
+            s.resize(n + 1);
+            s[s.size()] = '\0';
+        }
+    }
+    ~String(){
+        s.clear();
+    }
+    void operator= (String scnd) {
+        if(scnd.size() > size()) s.resize(scnd.size());
+        s = scnd.s;
+    }
+    void operator= (string scnd){
+        if(scnd.size() > size()) s.resize(scnd.size());
+        for(int i = 0; i < scnd.size(); ++i){
+            s[i] = scnd[i];
+        }
+    }
+    char operator[] (int index){
+        return s[index];
+    }
+    long size(){
+            return(s.size());
+    }
+    void print(){
+        for(int i = 0; i < s.size(); ++i) cout << s[i];
+        cout << endl;
+    }
+};
+
+int main() {
+    String a(6, "hcjgjg");
+    String b(10, "jknfszzdfsddf");
+    a = b;
+    a.print();
+    a = "Podoksik, Grigorii Alexandrovich";
+    a.print();
+    return 0;
+}
