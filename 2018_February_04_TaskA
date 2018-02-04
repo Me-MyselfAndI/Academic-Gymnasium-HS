@@ -1,0 +1,109 @@
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+
+
+class IrRat {
+public:
+    double normal;
+    double awful;
+    void onCreate(double n, double a){
+        normal = n;
+        awful = a;
+    }
+    IrRat operator+ (IrRat scnd){
+        IrRat result;
+        result.normal = normal + scnd.normal;
+        result.awful = pow(awful, 2) + 2*awful*scnd.awful + pow(scnd.awful, 2);
+        if(fmod(sqrt(result.awful), 1) == 0) {
+            result.normal += result.awful;
+            result.awful = 0;
+        }
+        return result;
+    }
+
+    IrRat operator- (IrRat scnd){
+        IrRat result;
+        result.normal = normal - scnd.normal;
+        result.awful = pow(awful, 2) - 2*awful*scnd.awful + pow(scnd.awful, 2);
+        if(fmod(sqrt(result.awful), 1) == 0) {
+            result.normal += result.awful;
+            result.awful = 0;
+        }
+        return result;
+    }
+
+    IrRat operator* (IrRat scnd){
+        IrRat result;
+        result.normal = normal * normal;
+        result.awful = awful*scnd.awful + awful*scnd.normal + normal*scnd.awful;
+        if(fmod(sqrt(result.awful), 1) == 0) {
+            result.normal = result.awful;
+            result.awful = 0;
+        }
+        return result;
+    }
+
+    IrRat operator/ (IrRat scnd){
+        IrRat val;
+        int znamenatel = (pow(scnd.normal, 2) - scnd.awful);
+        val.normal = normal * scnd.normal / znamenatel;
+        val.awful = awful*scnd.normal - awful*scnd.awful - normal*scnd.awful / znamenatel;
+        return  val;
+    }
+
+    void print(){
+        cout << normal << " + sqrt(" << awful << ")";
+    }
+
+};
+
+class ComplX{
+public:
+    IrRat normal;
+    IrRat evenMoreAwful;
+    ComplX(IrRat n, IrRat e){
+        normal = n;
+        evenMoreAwful = e;
+    }
+
+    ComplX operator+ (ComplX scnd){
+        ComplX result(normal + scnd.normal, evenMoreAwful + scnd.evenMoreAwful);
+        return result;
+    }
+
+    ComplX operator- (ComplX scnd){
+        ComplX result(normal - scnd.normal, evenMoreAwful - scnd.evenMoreAwful);
+        return result;
+    }
+
+    ComplX operator* (ComplX scnd){
+        ComplX result(normal * normal - evenMoreAwful*scnd.evenMoreAwful, evenMoreAwful*scnd.normal + normal*scnd.evenMoreAwful);
+        return result;
+    }
+
+    ComplX operator/ (ComplX scnd){
+        IrRat a;
+        ComplX val(a, a);
+        IrRat znamenatel = (scnd.normal*scnd.normal - scnd.evenMoreAwful);
+        val.normal = normal * scnd.normal / znamenatel;
+        val.evenMoreAwful = evenMoreAwful*scnd.normal - evenMoreAwful*scnd.evenMoreAwful - normal*scnd.evenMoreAwful / znamenatel;
+        return val;
+    }
+
+    void print(){
+        normal.print();
+        cout << " + sqrt(";
+        evenMoreAwful.print();
+        cout << ")";
+    }
+
+
+};
+
+
+int main() {
+
+    return 0;
+}
