@@ -1,0 +1,80 @@
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+
+
+struct irrational{
+public:
+    int rat;
+    int irr;
+
+    void irrational(int r, int i){
+        rat = r;
+        irr = i;
+    }
+
+    void operator=(irrational B){
+        rat = B.rat;
+        irr = B.irr;
+        if(fmod(sqrt(irr), 1) == 0){
+            rat+=sqrt(irr);
+            irr = 0;
+        }
+    }
+};
+
+
+struct chain{
+public:
+    chain *head = NULL;
+    chain *link = NULL;
+    chain *next = NULL;
+    irrational value = NULL;
+
+    void chain(chain *h, chain *li, irrational v){
+        head = h;
+        link = li;
+        link->next = this;
+        value = v;
+        next = NULL;
+    }
+
+    void operator= (chain B){
+        value = B.value;
+    }
+
+    ~chain(){
+        delete[]head;
+        delete[]next;
+        delete[]link;
+        delete value;
+    }
+
+    chain* front(){
+        return head;
+    }
+
+    bool empty(){
+        return head!=NULL;
+    }
+
+    void push(irrational a){
+        chain z(head, front(), a);
+    }
+
+    void pop(){
+        chain *a = head;
+        head->head = next;
+        for(chain *i = head; i !=NULL; i = i->link) i->head = a->head;
+        delete &a;
+        delete a;
+    }
+
+};
+
+
+int main() {
+
+    return 0;
+}
