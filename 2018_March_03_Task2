@@ -4,35 +4,15 @@
 using namespace std;
 
 
-struct irrational{
-public:
-    int rat;
-    int irr;
-
-    void irrational(int r, int i){
-        rat = r;
-        irr = i;
-    }
-
-    void operator=(irrational B){
-        rat = B.rat;
-        irr = B.irr;
-        if(fmod(sqrt(irr), 1) == 0){
-            rat+=sqrt(irr);
-            irr = 0;
-        }
-    }
-};
-
 
 struct chain{
 public:
     chain *head = NULL;
     chain *link = NULL;
     chain *next = NULL;
-    irrational value = NULL;
+    char value = NULL;
 
-    void chain(chain *h, chain *li, irrational v){
+    void chain(chain *h, chain *li, char v){
         head = h;
         link = li;
         link->next = this;
@@ -59,7 +39,7 @@ public:
         return head!=NULL;
     }
 
-    void push(irrational a){
+    void push(char a){
         chain z(head, front(), a);
     }
 
